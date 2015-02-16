@@ -24,29 +24,45 @@
 #
 
 macro(__SlicerBlockFindQtAndCheckVersion_find_qt)
-  find_package(Qt4)
-  if(NOT QT4_FOUND)
-    message(FATAL_ERROR "error: Qt ${Slicer_REQUIRED_QT_VERSION} was not found on your system."
-                        "You probably need to set the QT_QMAKE_EXECUTABLE variable.")
-  endif()
 
-  # Check version
-  if("${QT_VERSION_MAJOR}.${QT_VERSION_MINOR}.${QT_VERSION_PATCH}" VERSION_LESS "${Slicer_REQUIRED_QT_VERSION}")
-    message(FATAL_ERROR "error: Slicer requires at least Qt ${Slicer_REQUIRED_QT_VERSION} "
-                        "-- you cannot use Qt ${QT_VERSION_MAJOR}.${QT_VERSION_MINOR}.${QT_VERSION_PATCH}. ${extra_error_message}")
-  endif()
+	if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")  
 
-  set(command_separated_module_list)
-  # Check if all expected Qt modules have been discovered
-  foreach(module ${Slicer_REQUIRED_QT_MODULES})
-    if(NOT "${QT_${module}_FOUND}")
-      message(FATAL_ERROR "error: Missing Qt module ${module}")
-    endif()
-    if(NOT ${module} STREQUAL "QTCORE" AND NOT ${module} STREQUAL "QTGUI")
-      set(QT_USE_${module} ON)
-    endif()
-    set(command_separated_module_list "${command_separated_module_list}${module}, ")
-  endforeach()
+		#qt5
+		cmake_minimum_required(VERSION 2.8.12)
+		set(QT5_INSTALL_PREFIX "" CACHE PATH "The install location of Qt5")
+		set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT5_INSTALL_PREFIX})
+		set(Slicer_QT5_COMPONENTS Core Gui Widgets OpenGL UiTools Xml XmlPatterns Concurrent Sql Test WebKitWidgets)
+	
+		find_package(Qt5 COMPONENTS ${Slicer_QT5_COMPONENTS} REQUIRED)	
+
+	else()
+
+		# qt4
+		find_package(Qt4)
+		if(NOT QT4_FOUND)
+		message(FATAL_ERROR "error: Qt ${Slicer_REQUIRED_QT_VERSION} was not found on your system."
+							"You probably need to set the QT_QMAKE_EXECUTABLE variable.")
+		endif()
+
+		# Check version
+		if("${QT_VERSION_MAJOR}.${QT_VERSION_MINOR}.${QT_VERSION_PATCH}" VERSION_LESS "${Slicer_REQUIRED_QT_VERSION}")
+		message(FATAL_ERROR "error: Slicer requires at least Qt ${Slicer_REQUIRED_QT_VERSION} "
+							"-- you cannot use Qt ${QT_VERSION_MAJOR}.${QT_VERSION_MINOR}.${QT_VERSION_PATCH}. ${extra_error_message}")
+		endif()
+
+		set(command_separated_module_list)
+		# Check if all expected Qt modules have been discovered
+		foreach(module ${Slicer_REQUIRED_QT_MODULES})
+		if(NOT "${QT_${module}_FOUND}")
+		  message(FATAL_ERROR "error: Missing Qt module ${module}")
+		endif()
+		if(NOT ${module} STREQUAL "QTCORE" AND NOT ${module} STREQUAL "QTGUI")
+		  set(QT_USE_${module} ON)
+		endif()
+		set(command_separated_module_list "${command_separated_module_list}${module}, ")
+		endforeach()  
+
+	endif()
 endmacro()
 
 # Sanity checks - Check if variable are defined
@@ -87,6 +103,9 @@ endif()
 
 __SlicerBlockFindQtAndCheckVersion_find_qt()
 
-include(${QT_USE_FILE})
-
+if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")  
+	# Qt5 including procedure?
+elseif()
+	include(${QT_USE_FILE})
+endif()
 message(STATUS "Configuring ${PROJECT_NAME} with Qt ${QT_VERSION_MAJOR}.${QT_VERSION_MINOR}.${QT_VERSION_PATCH} (using modules: ${command_separated_module_list})")
