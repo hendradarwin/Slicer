@@ -527,12 +527,16 @@ endif()
 # For example, the module name associated with the variable QT_USE_QTXML is QTXML.
 # Note that the modules will be installed when packaging.
 set(Slicer_REQUIRED_QT_MODULES
-  QTCORE QTGUI
-  QTNETWORK QTOPENGL
+  QTCORE 
+  QTGUI
+  QTNETWORK 
+  QTOPENGL
   QTUITOOLS #no dll
-  QTXML QTXMLPATTERNS
+  QTXML 
+  QTXMLPATTERNS
   QTWEBKIT
-  QTSVG QTSQL
+  QTSVG 
+  QTSQL
   )
 if(WIN32)
   list(APPEND Slicer_REQUIRED_QT_MODULES PHONON) # webkit requires phonon

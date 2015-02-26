@@ -100,6 +100,8 @@ QList<QNetworkCookie> qSlicerPersistentCookieJar::cookiesForUrl( const QUrl & ur
   QStringList keys = settings.childKeys();
   foreach(const QString& key, keys)
     {
+	  //QNetworkCookie cookie;
+	  
     cookieList << QNetworkCookie(key.toLatin1(), settings.value(key).toString().toLatin1());
     }
   return cookieList;

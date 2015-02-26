@@ -60,9 +60,9 @@ set(SlicerApp_RESOURCES
   ${qSlicerBaseQTGUI_SOURCE_DIR}/Resources/qSlicerBaseQTGUI.qrc
   )
 
-QT4_WRAP_CPP(SlicerApp_SRCS ${SlicerApp_MOC_SRCS})
-QT4_WRAP_UI(SlicerApp_UI_CXX ${SlicerApp_UI_SRCS})
-QT4_ADD_RESOURCES(SlicerApp_QRC_SRCS ${SlicerApp_RESOURCES})
+QT5_WRAP_CPP(SlicerApp_SRCS ${SlicerApp_MOC_SRCS})
+QT5_WRAP_UI(SlicerApp_UI_CXX ${SlicerApp_UI_SRCS})
+QT5_ADD_RESOURCES(SlicerApp_QRC_SRCS ${SlicerApp_RESOURCES})
 
 set(SlicerApp_INCLUDE_DIRECTORIES
   ${CMAKE_CURRENT_BINARY_DIR}

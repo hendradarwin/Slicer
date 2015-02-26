@@ -20,7 +20,8 @@
 
 // Qt includes
 #include <QAbstractScrollArea>
-#include <QCleanlooksStyle>
+#include <qcommonstyle.h>
+
 #include <QDebug>
 #include <QEvent>
 #include <QGroupBox>
@@ -35,7 +36,7 @@
 
 // --------------------------------------------------------------------------
 qSlicerStyle::qSlicerStyle()
-  : Superclass(new QCleanlooksStyle)
+  : Superclass(new QCommonStyle())
 {
   this->baseStyle()->setParent(this);
 }

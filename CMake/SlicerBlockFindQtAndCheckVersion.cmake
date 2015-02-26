@@ -25,12 +25,15 @@
 
 macro(__SlicerBlockFindQtAndCheckVersion_find_qt)
 
+	message(STATUS "current prefix path is ${CMAKE_PREFIX_PATH} ") 
+	
+
 	if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")  
 
 		#qt5
 		cmake_minimum_required(VERSION 2.8.12)
 		set(QT5_INSTALL_PREFIX "" CACHE PATH "The install location of Qt5")
-		set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT5_INSTALL_PREFIX})
+		#set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT5_INSTALL_PREFIX})
 		set(Slicer_QT5_COMPONENTS Core Gui Widgets OpenGL UiTools Xml XmlPatterns Concurrent Sql Test WebKitWidgets)
 	
 		find_package(Qt5 COMPONENTS ${Slicer_QT5_COMPONENTS} REQUIRED)	

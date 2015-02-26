@@ -37,6 +37,7 @@ class Q_SLICER_QTMODULES_WELCOME_EXPORT qSlicerWelcomeModule :
 {
   Q_OBJECT
   Q_INTERFACES(qSlicerLoadableModule);
+  Q_PLUGIN_METADATA(IID "org.slicer.modules.loadable.qSlicerWelcomeModule" )
 
 public:
 
