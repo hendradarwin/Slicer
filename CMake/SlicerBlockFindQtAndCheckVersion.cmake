@@ -34,7 +34,7 @@ macro(__SlicerBlockFindQtAndCheckVersion_find_qt)
 		cmake_minimum_required(VERSION 2.8.12)
 		set(QT5_INSTALL_PREFIX "" CACHE PATH "The install location of Qt5")
 		#set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT5_INSTALL_PREFIX})
-		set(Slicer_QT5_COMPONENTS Core Gui Widgets OpenGL UiTools Xml XmlPatterns Concurrent Sql Test WebKitWidgets)
+		set(Slicer_QT5_COMPONENTS Core Gui Widgets OpenGL UiTools Xml XmlPatterns Concurrent Sql Test WebKitWidgets Script)
 	
 		find_package(Qt5 COMPONENTS ${Slicer_QT5_COMPONENTS} REQUIRED)	
 

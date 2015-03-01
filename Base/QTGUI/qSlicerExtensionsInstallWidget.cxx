@@ -23,6 +23,7 @@
 #include <QDesktopServices>
 #include <QWebFrame>
 #include <QWebView>
+#include <qurlquery.h>
 
 // CTK includes
 #include <ctkPimpl.h>
@@ -67,11 +68,21 @@ qSlicerExtensionsInstallWidgetPrivate::qSlicerExtensionsInstallWidgetPrivate(qSl
 QUrl qSlicerExtensionsInstallWidgetPrivate::extensionsListUrl()
 {
   QUrl url(this->ExtensionsManagerModel->serverUrlWithExtensionsStorePath());
-  url.setQueryItems(QList<QPair<QString, QString> >()
+
+  QUrlQuery query;
+
+
+  query.setQueryItems( QList<QPair<QString, QString> >()
                     << QPair<QString, QString>("layout", "empty")
                     << QPair<QString, QString>("os", this->SlicerOs)
                     << QPair<QString, QString>("arch", this->SlicerArch)
                     << QPair<QString, QString>("revision", this->SlicerRevision));
+
+
+  url.setQuery(query);
+
+
+
   return url;
 }
 

@@ -22,4 +22,4 @@
 
 #include <QtPlugin>
 
-Q_EXPORT_PLUGIN2(customwidgetplugin, qSlicerUnitsModuleWidgetsPlugin);
+//Q_EXPORT_PLUGIN2(customwidgetplugin, qSlicerUnitsModuleWidgetsPlugin);

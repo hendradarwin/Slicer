@@ -27,6 +27,7 @@
 #include <QWebFrame>
 #include <QWebHistory>
 #include <QWebView>
+#include <QUrlQuery>
 
 // CTK includes
 #include <ctkSearchBox.h>
@@ -357,7 +358,9 @@ void qSlicerExtensionsManagerWidget::onInstallUrlChanged(const QUrl& newUrl)
   if (newUrl.path().endsWith("/slicerappstore"))
     {
     d->toolsWidget->InstallSearchBox->setEnabled(true);
-    d->lastSearchText = newUrl.queryItemValue("search");
+	QUrlQuery query(newUrl);
+	
+	d->lastSearchText = query.queryItemValue("search");
     d->toolsWidget->InstallSearchBox->setText(d->lastSearchText);
     }
   else

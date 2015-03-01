@@ -30,6 +30,8 @@
 #include <QTemporaryFile>
 #include <QTextStream>
 #include <QUrl>
+#include <QUrlQuery>
+
 
 // CTK includes
 #include <ctkScopedCurrentDir.h>
@@ -78,7 +80,8 @@ class QStandardItemModelWithRole : public QStandardItemModel
 public:
   void setRoleNames(const QHash<int,QByteArray> &roleNames)
   {
-    this->QStandardItemModel::setRoleNames(roleNames);
+	  // Qt 5 tidak ada setRoleNames
+    //this->QStandardItemModel::setRoleNames(roleNames);
   }
 };
 
@@ -1102,8 +1105,13 @@ qSlicerExtensionsManagerModelPrivate::downloadExtension(
   this->debug(QString("Downloading extension [ itemId: %1]").arg(itemId));
   QUrl downloadUrl(q->serverUrl());
   downloadUrl.setPath(downloadUrl.path() + "/download");
-  downloadUrl.setQueryItems(
+
+  QUrlQuery query;
+  query.setQueryItems(
         QList<QPair<QString, QString> >() << QPair<QString, QString>("items", itemId));
+
+  downloadUrl.setQuery(query);
+
 
   QNetworkReply* const reply =
     this->NetworkManager.get(QNetworkRequest(downloadUrl));

@@ -125,18 +125,20 @@ QStringList qSlicerCorePythonManager::pythonPaths()
   else
     {
     // Add here python path specific to the INSTALLED tree
-#if defined(Q_WS_WIN)
+
+	  // compile using MSVC 2013, Q_WS_WIN is not defined
+//#if defined(Q_WS_WIN)
     QString pythonLibSubDirectory("/Lib");
     paths << app->slicerHome() + "/lib/Python" + pythonLibSubDirectory;
     paths << app->slicerHome() + "/lib/Python" + pythonLibSubDirectory + "/lib-dynload";
     paths << app->slicerHome() + "/lib/Python" + pythonLibSubDirectory + "/lib-tk";
-#elif defined(Q_WS_X11) || defined(Q_WS_MAC)
-    // On unix-like system, setting PYTHONHOME is enough to have the following path automatically
-    // appended to PYTHONPATH: ../lib/pythonX.Y.zip, ../lib/pythonX.Y/,
-    // and ../lib/pythonX.Y/{lib-tk, lib-old, lib-dynload}
-    // See http://docs.python.org/c-api/intro.html#embedding-python
-    QString pythonLibSubDirectory("/lib/python" Slicer_PYTHON_VERSION_DOT);
-#endif
+//#elif defined(Q_WS_X11) || defined(Q_WS_MAC)
+//    // On unix-like system, setting PYTHONHOME is enough to have the following path automatically
+//    // appended to PYTHONPATH: ../lib/pythonX.Y.zip, ../lib/pythonX.Y/,
+//    // and ../lib/pythonX.Y/{lib-tk, lib-old, lib-dynload}
+//    // See http://docs.python.org/c-api/intro.html#embedding-python
+//    QString pythonLibSubDirectory("/lib/python" Slicer_PYTHON_VERSION_DOT);
+//#endif
     paths << app->slicerHome() + "/lib/Python" + pythonLibSubDirectory + "/site-packages";
     }
 

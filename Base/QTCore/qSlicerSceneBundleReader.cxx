@@ -77,9 +77,9 @@ bool qSlicerSceneBundleReader::load(const qSlicerIO::IOProperties& properties)
 
   qDebug() << "Unpacking bundle to " << unpackPath;
 
-  if (vtksys::SystemTools::FileIsDirectory(unpackPath.toLatin1()))
+  if (vtksys::SystemTools::FileIsDirectory(unpackPath.toStdString() ))
     {
-    if ( !vtksys::SystemTools::RemoveADirectory(unpackPath.toLatin1()) )
+	  if (!vtksys::SystemTools::RemoveADirectory(unpackPath.toStdString()))
       {
       return false;
       }
@@ -112,7 +112,7 @@ bool qSlicerSceneBundleReader::load(const qSlicerIO::IOProperties& properties)
     res = this->mrmlScene()->Import();
     }
 
-  if ( !vtksys::SystemTools::RemoveADirectory(unpackPath.toLatin1()) )
+  if (!vtksys::SystemTools::RemoveADirectory(unpackPath.toStdString()))
     {
     return false;
     }

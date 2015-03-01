@@ -414,6 +414,12 @@ if(${VTK_VERSION_MAJOR} GREATER 5)
     )
 endif()
 
+
+# insert qt lib tanpa lewat slicer macro
+if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")
+  list(APPEND MRMLWidgets_LIBRARIES Qt5::Core Qt5::Widgets Qt5::WebKitWidgets)
+endif()
+
 target_link_libraries(${lib_name} ${MRMLWidgets_LIBRARIES})
 
 # Apply user-defined properties to the library target.

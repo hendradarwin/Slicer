@@ -46,7 +46,7 @@
 #include "qSlicerSubjectHierarchyModelsPlugin.h"
 
 //-----------------------------------------------------------------------------
-Q_EXPORT_PLUGIN2(qSlicerModelsModule, qSlicerModelsModule);
+//Q_EXPORT_PLUGIN2(qSlicerModelsModule, qSlicerModelsModule);
 
 //-----------------------------------------------------------------------------
 /// \ingroup Slicer_QtModules_Models

@@ -128,7 +128,7 @@ void qSlicerDICOMTagEditorWidgetPrivate::setupUi(QWidget *qSlicerDICOMTagEditorW
   this->TagsTable = new QTableWidget(qSlicerDICOMTagEditorWidget);
   this->TagsTable->setColumnCount(2);
   this->TagsTable->horizontalHeader()->setVisible(false);
-  this->TagsTable->horizontalHeader()->setResizeMode(QHeaderView::Stretch);
+  this->TagsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
   this->TagsTable->verticalHeader()->setVisible(false);
   this->TagsTable->horizontalHeader()->setStretchLastSection(true);
   this->TagsTable->setSelectionMode(QAbstractItemView::NoSelection);

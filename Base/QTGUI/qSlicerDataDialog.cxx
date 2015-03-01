@@ -24,6 +24,8 @@
 #include <QDropEvent>
 #include <QFileDialog>
 
+#include <qmimedata.h>
+
 /// CTK includes
 #include <ctkCheckableHeaderView.h>
 #include <ctkCheckableModelHelper.h>
@@ -52,8 +54,14 @@ qSlicerDataDialogPrivate::qSlicerDataDialogPrivate(QWidget* _parent)
   ctkCheckableHeaderView* headerView = new ctkCheckableHeaderView(
     Qt::Horizontal, this->FileWidget);
   // Copy the previous behavior of the header into the new checkable header view
-  headerView->setClickable(previousHeaderView->isClickable());
-  headerView->setMovable(previousHeaderView->isMovable());
+
+  //headerView->setClickable(previousHeaderView->isClickable());
+  headerView->setSectionsClickable(previousHeaderView->sectionsClickable());
+
+  //headerView->setMovable(previousHeaderView->isMovable());
+  headerView->setSectionsMovable(previousHeaderView->sectionsMovable());
+
+
   headerView->setHighlightSections(previousHeaderView->highlightSections());
   headerView->setStretchLastSection(previousHeaderView->stretchLastSection());
   // Propagate to top-level items only (depth = 1),no need to go deeper
@@ -63,9 +71,10 @@ qSlicerDataDialogPrivate::qSlicerDataDialogPrivate(QWidget* _parent)
   this->FileWidget->setHorizontalHeader(headerView);
 
   headerView->setStretchLastSection(false);
-  headerView->setResizeMode(FileColumn, QHeaderView::Stretch);
-  headerView->setResizeMode(TypeColumn, QHeaderView::ResizeToContents);
-  headerView->setResizeMode(OptionsColumn, QHeaderView::ResizeToContents);
+  
+  headerView->setSectionResizeMode(FileColumn, QHeaderView::Stretch);
+  headerView->setSectionResizeMode(TypeColumn, QHeaderView::ResizeToContents);
+  headerView->setSectionResizeMode(OptionsColumn, QHeaderView::ResizeToContents);
 
   this->FileWidget->sortItems(-1, Qt::AscendingOrder);
 

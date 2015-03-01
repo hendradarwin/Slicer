@@ -19,6 +19,7 @@
 #define __qMRMLExpandingWebView_h
 
 // Qt includes
+// belum target_library (Qt5::Network Qt5:: WebkitWidgets)
 #include <QWebView>
 
 #include "qMRMLWidgetsExport.h"

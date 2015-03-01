@@ -35,6 +35,7 @@
 #include <QStyledItemDelegate>
 #include <QTextBlock>
 #include <QTextDocument>
+#include <QUrlQuery>
 
 // Slicer includes
 #include "qSlicerExtensionsManagerModel.h"
@@ -896,9 +897,14 @@ void qSlicerExtensionsManageWidget::onLinkActivated(const QString& link)
 
   QUrl url = d->ExtensionsManagerModel->serverUrl();
   url.setPath(url.path() + "/slicerappstore/extension/view");
-  url.addQueryItem("extensionId", link.mid(7)); // remove leading "slicer:"
-  url.addQueryItem("breadcrumbs", "none");
-  url.addQueryItem("layout", "empty");
+
+  QUrlQuery query;
+ 
+  query.addQueryItem("extensionId", link.mid(7)); // remove leading "slicer:"
+  query.addQueryItem("breadcrumbs", "none");
+  query.addQueryItem("layout", "empty");
+
+  url.setQuery(query);
 
   emit this->linkActivated(url);
 }

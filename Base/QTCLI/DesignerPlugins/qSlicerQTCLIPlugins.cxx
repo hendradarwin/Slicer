@@ -22,4 +22,4 @@
 
 #include <QtPlugin>
 
-Q_EXPORT_PLUGIN2(customwidgetplugin, qSlicerQTCLIPlugins);
+//Q_EXPORT_PLUGIN2(customwidgetplugin, qSlicerQTCLIPlugins);

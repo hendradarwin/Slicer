@@ -39,7 +39,7 @@
 #include "TractographyDisplayInstantiator.h"
 
 //-----------------------------------------------------------------------------
-Q_EXPORT_PLUGIN2(qSlicerTractographyDisplayModule, qSlicerTractographyDisplayModule);
+//Q_EXPORT_PLUGIN2(qSlicerTractographyDisplayModule, qSlicerTractographyDisplayModule);
 
 //-----------------------------------------------------------------------------
 qSlicerTractographyDisplayModule::

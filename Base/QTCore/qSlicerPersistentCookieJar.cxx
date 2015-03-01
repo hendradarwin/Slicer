@@ -24,6 +24,8 @@
 #include <QFileInfo>
 #include <QSettings>
 #include <QStringList>
+#include <QNetworkCookie>
+
 
 // QtCore includes
 #include "qSlicerPersistentCookieJar.h"

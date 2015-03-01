@@ -1187,7 +1187,11 @@ void qSlicerAppMainWindow::on_EditApplicationSettingsAction_triggered()
   // Reload settings to apply any changes that have been made outside of the
   // dialog (e.g. changes to module paths due to installing extensions). See
   // http://na-mic.org/Mantis/view.php?id=3658.
-  settingsDialog->reloadSettings();
+  
+  
+  // tidak ada di versi VTK ini....
+  //settingsDialog->reloadSettings();
+  settingsDialog->applySettings();
 
   // Now show the dialog
   settingsDialog->exec();

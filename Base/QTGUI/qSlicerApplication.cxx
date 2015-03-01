@@ -608,15 +608,18 @@ int qSlicerApplication::numberOfRecentLogFilesToKeep()
   bool groupExists = false;
   int numberOfFilesToKeep = revisionUserSettings->value(
     "LogFiles/NumberOfFilesToKeep").toInt(&groupExists);
-  if (!groupExists)
-    {
-    // Get default value from the ErrorLogModel if value is not set in settings
-    numberOfFilesToKeep = d->ErrorLogModel->numberOfFilesToKeep();
-    }
-  else
-    {
-    d->ErrorLogModel->setNumberOfFilesToKeep(numberOfFilesToKeep);
-    }
+  
+  
+  // Current CTK version does not include File Log Model
+  //if (!groupExists)
+  //  {
+  //  // Get default value from the ErrorLogModel if value is not set in settings
+  //  numberOfFilesToKeep = d->ErrorLogModel->numberOfFilesToKeep();
+  //  }
+  //else
+  //  {
+  //  d->ErrorLogModel->setNumberOfFilesToKeep(numberOfFilesToKeep);
+  //  }
 
   return numberOfFilesToKeep;
 }
@@ -646,7 +649,7 @@ void qSlicerApplication::setupFileLogging()
 {
   Q_D(qSlicerApplication);
 
-  d->ErrorLogModel->setFileLoggingEnabled(true);
+  //d->ErrorLogModel->setFileLoggingEnabled(true);
 
   int numberOfFilesToKeep = numberOfRecentLogFilesToKeep();
 
@@ -685,7 +688,7 @@ void qSlicerApplication::setupFileLogging()
   revisionUserSettings->endGroup();
 
   // Set current log file path
-  d->ErrorLogModel->setFilePath(currentLogFilePath);
+  //d->ErrorLogModel->setFilePath(currentLogFilePath);
 
   // Log essential information (platform, revision, date, etc.)
   QFile f(currentLogFilePath);

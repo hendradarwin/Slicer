@@ -228,6 +228,12 @@ if(Slicer_USE_PYTHONQT)
 
 endif(Slicer_USE_PYTHONQT)
 
+
+if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")
+  list(APPEND KIT_target_libraries Qt5::Core Qt5::Widgets Qt5::Script)
+endif()
+
+
 SlicerMacroBuildBaseQtLibrary(
   NAME ${PROJECT_NAME}
   EXPORT_DIRECTIVE ${KIT_export_directive}

@@ -9,7 +9,7 @@
 #include "qSlicerTractographyInteractiveSeedingModuleWidget.h"
 
 //-----------------------------------------------------------------------------
-Q_EXPORT_PLUGIN2(qSlicerTractographyInteractiveSeedingModule, qSlicerTractographyInteractiveSeedingModule);
+//Q_EXPORT_PLUGIN2(qSlicerTractographyInteractiveSeedingModule, qSlicerTractographyInteractiveSeedingModule);
 
 //-----------------------------------------------------------------------------
 qSlicerTractographyInteractiveSeedingModule::

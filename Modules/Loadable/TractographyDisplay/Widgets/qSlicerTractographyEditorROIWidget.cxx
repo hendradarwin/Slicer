@@ -192,8 +192,8 @@ void qSlicerTractographyEditorROIWidget::
     std::string fiberName = std::string("Update ") + std::string(d->FiberBundleNode->GetName()) +
                             std::string(" From ROI");
 
-    d->UpdateBundleFromSelection->setText(QApplication::translate("qSlicerTractographyEditorROIWidget",
-                            fiberName.c_str(), 0, QApplication::UnicodeUTF8));
+    d->UpdateBundleFromSelection->setText( QApplication::translate("qSlicerTractographyEditorROIWidget",
+                            fiberName.c_str(), 0));
   }
 
   if (d->FiberBundleNode && d->AnnotationMRMLNodeForFiberSelection)

@@ -118,7 +118,9 @@ void qSlicerSettingsViewsPanel::onMSAAChanged(const QString& text)
   Q_D(const qSlicerSettingsViewsPanel);
   const int index = d->MSAAComboBox->findText(text);
   const int nSamples = d->MSAAComboBox->itemData(index).toInt();
-  ctkVTKAbstractView::setMultiSamples(nSamples);
+
+  // tidak ada interface langsung ke render window nya CTK
+  //ctkVTKAbstractView::setMultiSamples(nSamples);
 }
 
 // --------------------------------------------------------------------------
