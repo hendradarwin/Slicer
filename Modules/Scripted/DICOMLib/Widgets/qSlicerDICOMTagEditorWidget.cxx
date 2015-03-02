@@ -26,8 +26,9 @@
 
 // Qt includes
 #include <QDebug>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QTableWidget>
+//#include <QtGui/QVBoxLayout>
+#include <QVBoxLayout>
+#include <QTableWidget>
 #include <QScrollArea>
 #include <QHeaderView>
 

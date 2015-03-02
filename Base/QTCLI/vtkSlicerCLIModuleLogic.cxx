@@ -42,6 +42,9 @@
 #include <itksys/SystemTools.hxx>
 #include <itksys/RegularExpression.hxx>
 
+
+#include <Windows.h>
+
 // QT includes
 #include <QDebug>
 
@@ -1762,10 +1765,26 @@ void vtkSlicerCLIModuleLogic::ApplyTask(void *clientdata)
     // Historically, there was an nvidia driver bug that causes the module
     // to fail on exit with undefined symbol.
      std::string saveITKAutoLoadPath;
-     itksys::SystemTools::GetEnv("ITK_AUTOLOAD_PATH", saveITKAutoLoadPath);
+
+	 // alternative to itk sys
+	 DWORD bufferSize = 65535; //Limit according to http://msdn.microsoft.com/en-us/library/ms683188.aspx
+	 saveITKAutoLoadPath.resize(bufferSize);
+	 bufferSize = GetEnvironmentVariable("ITK_AUTOLOAD_PATH", &saveITKAutoLoadPath[0], bufferSize);
+	 if (!bufferSize)
+	 { 
+		 //error
+	 }
+	 saveITKAutoLoadPath.resize(bufferSize);	 
+     //itksys::SystemTools::GetEnv("ITK_AUTOLOAD_PATH", saveITKAutoLoadPath);
+
+
+
      std::string emptyString("ITK_AUTOLOAD_PATH=");
-     int putSuccess =
-       itksys::SystemTools::PutEnv(const_cast <char *> (emptyString.c_str()));
+     //int putSuccess = itksys::SystemTools::PutEnv(const_cast <char *> (emptyString.c_str()));
+	 int putSuccess = SetEnvironmentVariable("ITK_AUTOLOAD_PATH", "");
+
+
+
      if (!putSuccess)
        {
        vtkErrorMacro( "Unable to reset ITK_AUTOLOAD_PATH.");
@@ -1790,9 +1809,15 @@ void vtkSlicerCLIModuleLogic::ApplyTask(void *clientdata)
 
     // restore the load path
     std::string putEnvString = ("ITK_AUTOLOAD_PATH=");
-    putEnvString = putEnvString + saveITKAutoLoadPath;
-    putSuccess =
-      itksys::SystemTools::PutEnv(const_cast <char *> (putEnvString.c_str()));
+    // putEnvString = putEnvString + saveITKAutoLoadPath;
+    // putSuccess = itksys::SystemTools::PutEnv(const_cast <char *> (putEnvString.c_str()));
+
+	putSuccess = SetEnvironmentVariable("ITK_AUTOLOAD_PATH", saveITKAutoLoadPath.c_str());
+
+
+
+
+
     if (!putSuccess)
       {
       vtkErrorMacro( "Unable to restore ITK_AUTOLOAD_PATH. ");

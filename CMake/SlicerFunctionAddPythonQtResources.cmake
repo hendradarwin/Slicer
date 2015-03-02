@@ -38,6 +38,10 @@ function(slicerFunctionAddPythonQtResources RESOURCE_NAMES)
         )
     endif()
 
+	
+	# qt 5 belum ada ini componenya
+	get_target_property(QT_RCC_EXECUTABLE Qt5::rcc LOCATION)
+	
     # Create command to generate the compiled resource script
     add_custom_command(
       OUTPUT ${out_path}

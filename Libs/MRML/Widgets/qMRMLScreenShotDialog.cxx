@@ -21,7 +21,7 @@
 #include <QButtonGroup>
 #include <QMetaProperty>
 #include <QWeakPointer>
-
+#include <QSharedPointer>
 // CTK includes
 #include <ctkVTKWidgetsUtils.h>
 
@@ -142,7 +142,12 @@ qMRMLScreenShotDialog::~qMRMLScreenShotDialog()
 void qMRMLScreenShotDialog::setLayoutManager(qMRMLLayoutManager* newlayoutManager)
 {
   Q_D(qMRMLScreenShotDialog);
-  d->LayoutManager = newlayoutManager;
+  //d->LayoutManager = newlayoutManager;
+
+  // QWeakPointer takes QObject* is deprecated in Qt5
+
+  QSharedPointer<qMRMLLayoutManager> temp(newlayoutManager);
+  d->LayoutManager = temp;
 }
 
 //-----------------------------------------------------------------------------

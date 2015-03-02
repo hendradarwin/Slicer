@@ -83,6 +83,13 @@ set(MODULE_TARGET_LIBRARIES
   )
 
 #-----------------------------------------------------------------------------
+# perlu print support qt5
+if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")
+  list(APPEND MODULE_TARGET_LIBRARIES Qt5::Core Qt5::Widgets Qt5::WebKitWidgets Qt5::PrintSupport)
+endif()
+
+#-----------------------------------------------------------------------------
+
 slicerMacroBuildLoadableModule(
   NAME ${MODULE_NAME}
   TITLE ${MODULE_TITLE}
