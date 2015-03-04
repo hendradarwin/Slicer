@@ -8,6 +8,9 @@
 
 #include <itksys/SystemTools.hxx>
 
+
+#include "zlib.h"
+
 static const int MRI_UCHAR = 0;
 static const int MRI_INT   = 1;
 static const int MRI_FLOAT = 3;
@@ -52,6 +55,8 @@ int TWriteZ(gzFile oFile, T value)
   T*  pt = new T(value); //TODO:  Can this be statically initialized? const T[1] = { value };
   //TODO:  Why not just &value in the following line?;
   itk::ByteSwapper<T>::SwapFromSystemToBigEndian(pt);
+
+  
 
   const int result = ::gzwrite(oFile, pt, sizeof(T) );
   delete pt;

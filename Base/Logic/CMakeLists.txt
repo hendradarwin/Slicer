@@ -38,6 +38,9 @@ list(APPEND ITK_INCLUDE_DIRS
   )
 include(${ITK_USE_FILE})
 
+message(STATUS "finding ITK component for project: ${PROJECT_NAME} , itk component is: ${${PROJECT_NAME}_ITK_COMPONENTS} ")
+
+
 #
 # LibArchive
 #

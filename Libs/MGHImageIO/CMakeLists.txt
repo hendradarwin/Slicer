@@ -28,13 +28,16 @@ endif()
 set(${PROJECT_NAME}_ITK_COMPONENTS
   ITKCommon
   ITKIOImageBase
-  ITKZLIB
+#  ITKZLIB
   )
 find_package(ITK 4.6 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
 set(ITK_NO_IO_FACTORY_REGISTER_MANAGER 1) # See Libs/ITKFactoryRegistration/CMakeLists.txt
 list(APPEND ITK_LIBRARIES ITKFactoryRegistration)
 list(APPEND ITK_INCLUDE_DIRS ${ITKFactoryRegistration_INCLUDE_DIRS})
 include(${ITK_USE_FILE})
+
+message(STATUS "finding ITK component for project: ${PROJECT_NAME} , itk component is: ${${PROJECT_NAME}_ITK_COMPONENTS} ")
+
 
 # --------------------------------------------------------------------------
 # Include dirs

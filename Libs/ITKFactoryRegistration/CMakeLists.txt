@@ -39,6 +39,8 @@ set(${PROJECT_NAME}_ITK_COMPONENTS
   )
 find_package(ITK 4.6 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
 
+message(STATUS "finding ITK component for project: ${PROJECT_NAME} , itk component is: ${${PROJECT_NAME}_ITK_COMPONENTS} ")
+
 # This is the Slicer library in charge of registering the default ITK factories.
 set(ITK_NO_IO_FACTORY_REGISTER_MANAGER 0)
 
