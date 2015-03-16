@@ -37,7 +37,7 @@ set(${PROJECT_NAME}_ITK_COMPONENTS
   ITKIOTransformBase
   ${ITK_IO_MODULES_USED}
   )
-find_package(ITK 4.6 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
+find_package(ITK 4.8 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
 
 message(STATUS "finding ITK component for project: ${PROJECT_NAME} , itk component is: ${${PROJECT_NAME}_ITK_COMPONENTS} ")
 

@@ -117,6 +117,9 @@ set(SlicerApp_LIBRARIES
   qSlicerBaseQTApp
   )
 
+  
+message(STATUS "hello ini lib punya nya   ${KIT_LIBRARY_NAME} isi nya adalah: ${SlicerApp_LIBRARIES}" )
+  
 target_link_libraries(${KIT_LIBRARY_NAME}
   ${SlicerApp_LIBRARIES}
   )
@@ -231,6 +234,8 @@ if(WIN32)
       )
   endif()
 endif()
+
+message(STATUS "hello ini lib punya nya   ${KIT_LIBRARY_NAME} isi nya adalah: ${PROJECT_NAME}${SlicerApp_EXE_SUFFIX}" )
 
 target_link_libraries(${PROJECT_NAME}${SlicerApp_EXE_SUFFIX}
   ${KIT_LIBRARY_NAME}

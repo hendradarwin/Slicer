@@ -209,6 +209,9 @@ macro(SlicerMacroBuildBaseQtLibrary)
     set_target_properties(${lib_name} PROPERTIES ${Slicer_LIBRARY_PROPERTIES})
   endif()
 
+  
+  message(STATUS "hello ini ${lib_name} isi nya apa: ${SLICERQTBASELIB_TARGET_LIBRARIES} ")
+  
   target_link_libraries(${lib_name}
     ${SLICERQTBASELIB_TARGET_LIBRARIES}
     )

@@ -16,7 +16,7 @@ find_package(SlicerExecutionModel REQUIRED ModuleDescriptionParser)
 set(${PROJECT_NAME}_ITK_COMPONENTS
   ${ModuleDescriptionParser_ITK_COMPONENTS}
   )
-find_package(ITK 4.6 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
+find_package(ITK 4.8 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
 
 message(STATUS "finding ITK component for project: ${PROJECT_NAME} , itk component is: ${${PROJECT_NAME}_ITK_COMPONENTS} ")
 
@@ -105,6 +105,8 @@ if(SlicerBaseCLI_SRCS)
   # --------------------------------------------------------------------------
   set(lib_name "SlicerBaseCLI")
 
+  message(STATUS "hello ini apa isinya : ${SlicerBaseCLI_LIBS} ")
+  
   add_library(${lib_name} ${SlicerBaseCLI_SRCS})
   target_link_libraries(${lib_name} ${SlicerBaseCLI_LIBS})
   set_target_properties(${lib_name} PROPERTIES LABELS ${lib_name})

@@ -11,6 +11,7 @@
   Version:   $Revision$
 
 ==========================================================================*/
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
 
 // VTKITK includes
 #include "vtkITKArchetypeImageSeriesReader.h"

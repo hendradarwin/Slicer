@@ -13,6 +13,9 @@ PURPOSE.  See the above copyright notice for more information.
 
 
 =========================================================================*/
+
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
+
 #include "vtkITKLevelTracing3DImageFilter.h"
 #include "itkLevelTracingImageFilter.h"
 

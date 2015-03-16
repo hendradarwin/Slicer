@@ -13,6 +13,8 @@ PURPOSE.  See the above copyright notice for more information.
 
 
 =========================================================================*/
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
+
 #include "vtkITKWandImageFilter.h"
 
 #include "vtkDataArray.h"

@@ -29,6 +29,8 @@ function(slicerFunctionAddPythonQtResources RESOURCE_NAMES)
         list(APPEND rc_depends ${rc_file})
       endforeach()
 
+	  # copy_only invalid argument pass to qt5 cmake macro
+	  
       # Copy the input qrc script to enforce recalculation of dependencies on
       # changes to the same
       configure_file(

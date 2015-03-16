@@ -11,6 +11,8 @@
   Version:   $Revision: 6383 $
 
 ==========================================================================*/
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
+
 #include "vtkITKTimeSeriesDatabase.h"
 
 #include <vtkInformation.h>

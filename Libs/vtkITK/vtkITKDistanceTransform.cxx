@@ -11,6 +11,7 @@
   Version:   $Revision: 1900 $
 
 ==========================================================================*/
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
 
 #include "vtkITKDistanceTransform.h"
 #include "vtkObjectFactory.h"

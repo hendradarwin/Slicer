@@ -3,6 +3,7 @@
  * Implements wrapper for the itkGrowCutSegmentationImageFilter
  * This implemnents n-class segmentation
  **********************************************************************/
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
 
 #include "vtkITKGrowCutSegmentationImageFilter.h"
 

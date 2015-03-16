@@ -1,5 +1,8 @@
 
+#pragma comment(lib, "rpcrt4.lib") // bug fixed for  uuidcreate not found
 #include "itkFactoryRegistration.h"
+
+
 
 // ITK includes
 #include <itkImageFileReader.h>
