@@ -38,7 +38,10 @@ class Q_SLICER_QTMODULES_WELCOME_EXPORT qSlicerWelcomeModule :
   Q_OBJECT
   Q_INTERFACES(qSlicerLoadableModule);
   Q_PLUGIN_METADATA(IID "org.slicer.modules.loadable.qSlicerWelcomeModule" )
-
+//#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+//	  Q_PLUGIN_METADATA(IID "qSlicerVolumesModule")
+//	  //FILE "file-here-but-can-be-empty"
+//#endif
 public:
 
   typedef qSlicerLoadableModule Superclass;

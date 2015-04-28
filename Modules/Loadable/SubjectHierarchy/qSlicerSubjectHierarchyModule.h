@@ -42,7 +42,8 @@ class Q_SLICER_QTMODULES_SUBJECTHIERARCHY_EXPORT qSlicerSubjectHierarchyModule :
   Q_INTERFACES(qSlicerLoadableModule);
   QVTK_OBJECT
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-	Q_PLUGIN_METADATA(IID "qSlicerSubjectHierarchyModule" FILE "file-here-but-can-be-empty")
+	Q_PLUGIN_METADATA(IID "qSlicerSubjectHierarchyModule" )
+	//FILE "file-here-but-can-be-empty"
 #endif
 
 public:

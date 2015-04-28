@@ -31,7 +31,10 @@ class Q_SLICER_QTMODULES_DOUBLEARRAYS_EXPORT qSlicerDoubleArraysModule :
 {
   Q_OBJECT
   Q_INTERFACES(qSlicerLoadableModule);
-
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+  Q_PLUGIN_METADATA(IID "qSlicerDoubleArraysModule")
+	  //FILE "file-here-but-can-be-empty"
+#endif
 public:
 
   typedef qSlicerLoadableModule Superclass;

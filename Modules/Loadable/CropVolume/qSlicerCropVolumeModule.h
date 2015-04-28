@@ -14,6 +14,10 @@ class Q_SLICER_QTMODULES_CROPVOLUME_EXPORT qSlicerCropVolumeModule :
 {
   Q_OBJECT
   Q_INTERFACES(qSlicerLoadableModule);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+  Q_PLUGIN_METADATA(IID "qSlicerCropVolumeModule")
+	  //FILE "file-here-but-can-be-empty"
+#endif
 
 public:
 
