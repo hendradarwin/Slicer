@@ -34,6 +34,8 @@
 // VTKSYS includes
 #include <vtksys/SystemTools.hxx>
 
+#include <qdebug.h>
+
 //-----------------------------------------------------------------------------
 qSlicerLoadableModuleFactoryItem::qSlicerLoadableModuleFactoryItem()
 {
@@ -94,7 +96,7 @@ QStringList qSlicerLoadableModuleFactoryPrivate::modulePaths() const
   QStringList additionalModulePaths = settings->value("Modules/AdditionalPaths").toStringList();
   QStringList qtModulePaths =  additionalModulePaths + defaultQTModulePaths;
 
-  //qDebug() << "qtModulePaths:" << qtModulePaths;
+  qDebug() << "qtModulePaths:" << qtModulePaths;
 
   return qtModulePaths;
 }
@@ -142,8 +144,10 @@ qSlicerLoadableModuleFactoryItem* qSlicerLoadableModuleFactory::createFactoryFil
 //-----------------------------------------------------------------------------
 bool qSlicerLoadableModuleFactory::isValidFile(const QFileInfo& file)const
 {
+	qDebug() << "qSlicerLoadableModuleFactory::isValidFile";
   if (!Superclass::isValidFile(file))
     {
+	  qDebug() << "super class qSlicerLoadableModuleFactory::isValidFile return false";
     return false;
     }
   return qSlicerUtils::isLoadableModule(file.absoluteFilePath());

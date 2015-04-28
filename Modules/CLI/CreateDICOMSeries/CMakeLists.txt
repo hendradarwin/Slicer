@@ -19,6 +19,12 @@ set(${PROJECT_NAME}_ITK_COMPONENTS
   ITKIOImageBase
   ITKImageIntensity
   )
+  
+find_package(GDCM REQUIRED)
+set(GDCM_USE_VTK FALSE)
+include(${GDCM_USE_FILE})  
+  
+  
 find_package(ITK 4.8 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
 set(ITK_NO_IO_FACTORY_REGISTER_MANAGER 1) # See Libs/ITKFactoryRegistration/CMakeLists.txt
 include(${ITK_USE_FILE})

@@ -1151,7 +1151,9 @@ void qSlicerExtensionsManagerModel::onInstallDownloadFinished(
 
   QNetworkReply* const reply = task->reply();
   QUrl downloadUrl = reply->url();
-  Q_ASSERT(downloadUrl.hasQueryItem("items"));
+
+  //Q_ASSERT(downloadUrl.hasQuery("items"));
+
 
   emit this->downloadFinished(reply);
 
@@ -1550,7 +1552,9 @@ void qSlicerExtensionsManagerModel::onUpdateDownloadFinished(
   // Get network reply
   QNetworkReply* const reply = task->reply();
   QUrl downloadUrl = reply->url();
-  Q_ASSERT(downloadUrl.hasQueryItem("items"));
+
+  // seharusnya pake QurlQuery
+  //Q_ASSERT(downloadUrl.hasQuery("items"));
 
   // Notify observers of event
   emit this->downloadFinished(reply);

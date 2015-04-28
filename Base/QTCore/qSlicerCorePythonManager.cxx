@@ -38,10 +38,15 @@
 #include <vtkPythonUtil.h>
 #include <vtkVersion.h>
 
+
+#include <qdebug.h>
+
 //-----------------------------------------------------------------------------
 qSlicerCorePythonManager::qSlicerCorePythonManager(QObject* _parent)
   : Superclass(_parent)
 {
+	qDebug() << "qSlicerCorePythonManager::qSlicerCorePythonManager";
+
   this->Factory = 0;
   int flags = this->initializationFlags();
   flags &= ~(PythonQt::IgnoreSiteModule); // Clear bit
@@ -61,6 +66,8 @@ qSlicerCorePythonManager::~qSlicerCorePythonManager()
 //-----------------------------------------------------------------------------
 QStringList qSlicerCorePythonManager::pythonPaths()
 {
+	qDebug() << "qSlicerCorePythonManager::pythonPaths";
+
   qSlicerCoreApplication * app = qSlicerCoreApplication::application();
   if (!app)
     {
@@ -69,11 +76,13 @@ QStringList qSlicerCorePythonManager::pythonPaths()
 
   QStringList paths;
   paths << Superclass::pythonPaths();
-  paths << app->slicerHome() + "/" Slicer_BIN_DIR "/" + app->intDir();
-  paths << app->slicerHome() + "/" Slicer_BIN_DIR "/Python";
+  paths << app->slicerHome() + "/bin"  + app->intDir();
+  paths << app->slicerHome() + "/bin/Python";
 
   paths << QSettings().value("Python/AdditionalPythonPaths").toStringList();
   paths << app->slicerHome() + "/" Slicer_LIB_DIR;
+
+  qDebug() << paths;
 
 #ifdef Slicer_BUILD_QTLOADABLEMODULES
   bool appendQtLoadableModulePythonPaths = true;
@@ -142,26 +151,40 @@ QStringList qSlicerCorePythonManager::pythonPaths()
     paths << app->slicerHome() + "/lib/Python" + pythonLibSubDirectory + "/site-packages";
     }
 
+
+  qDebug() << paths;
+
   return paths;
 }
 
 //-----------------------------------------------------------------------------
 void qSlicerCorePythonManager::preInitialization()
 {
-  Superclass::preInitialization();
-  this->Factory = new ctkVTKPythonQtWrapperFactory;
-  this->addWrapperFactory(this->Factory);
-  qSlicerCoreApplication* app = qSlicerCoreApplication::application();
-  if (app)
+	qDebug() << "qSlicerCorePythonManager::preInitialization";
+
+
+	
+	qDebug() << "Superclass::preInitialization()";
+
+	Superclass::preInitialization();
+
+	qDebug() << "new ctkVTKPythonQtWrapperFactory";
+	this->Factory = new ctkVTKPythonQtWrapperFactory;
+	this->addWrapperFactory(this->Factory);
+	qSlicerCoreApplication* app = qSlicerCoreApplication::application();
+	if (app)
     {
     // Add object to python interpreter context
-    this->addObjectToPythonMain("_qSlicerCoreApplicationInstance", app);
+		qDebug() << "addObjectToPythonMain _qSlicerCoreApplicationInstance";
+		this->addObjectToPythonMain("_qSlicerCoreApplicationInstance", app);
     }
 }
 
 //-----------------------------------------------------------------------------
 void qSlicerCorePythonManager::addVTKObjectToPythonMain(const QString& name, vtkObject * object)
 {
+	qDebug() << "qSlicerCorePythonManager::addVTKObjectToPythonMain";
+
   if (name.isNull() || !object)
     {
     return;
@@ -195,6 +218,11 @@ void qSlicerCorePythonManager::addVTKObjectToPythonMain(const QString& name, vtk
 //-----------------------------------------------------------------------------
 void qSlicerCorePythonManager::appendPythonPath(const QString& path)
 {
+	qDebug() << "qSlicerCorePythonManager::appendPythonPath";
+	qDebug() << "Make sure PYTHONPATH is updated";
+
+	qDebug() << QString("import sys; sys.path.append('%1'); del sys").arg(path);
+
   // TODO Make sure PYTHONPATH is updated
   this->executeString(QString("import sys; sys.path.append('%1'); del sys").arg(path));
 }
@@ -202,6 +230,8 @@ void qSlicerCorePythonManager::appendPythonPath(const QString& path)
 //-----------------------------------------------------------------------------
 void qSlicerCorePythonManager::appendPythonPaths(const QStringList& paths)
 {
+	qDebug() << "qSlicerCorePythonManager::appendPythonPaths";
+
   foreach(const QString& path, paths)
     {
     this->appendPythonPath(path);

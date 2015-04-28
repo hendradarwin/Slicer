@@ -35,7 +35,9 @@ mark_as_advanced(MRML_USE_vtkTeem)
 # --------------------------------------------------------------------------
 # Dependencies
 # --------------------------------------------------------------------------
-
+find_package(GDCM REQUIRED)
+set(GDCM_USE_VTK FALSE)
+include(${GDCM_USE_FILE})
 #
 # VTK
 #

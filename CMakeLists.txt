@@ -25,9 +25,18 @@ endif()
 
 project(Slicer)
 
+
+
+
+
+
 #-----------------------------------------------------------------------------
 # Update CMake module path
 #------------------------------------------------------------------------------
+
+#add_definitions(/DMS_NO_COREDLL)
+
+
 set(CMAKE_MODULE_PATH
   ${Slicer_SOURCE_DIR}/Extensions/CMake
   ${CMAKE_MODULE_PATH}

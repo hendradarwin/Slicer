@@ -160,7 +160,7 @@ qSlicerApplicationPrivate::~qSlicerApplicationPrivate()
 void qSlicerApplicationPrivate::init()
 {
   Q_Q(qSlicerApplication);
-
+  qDebug() << "ctkVTKConnectionFactory::setInstance";
   ctkVTKConnectionFactory::setInstance(new qMRMLConnectionFactory);
 
 #ifdef Slicer_USE_PYTHONQT
@@ -168,9 +168,13 @@ void qSlicerApplicationPrivate::init()
     {
     // Note: qSlicerCoreApplication class takes ownership of the pythonManager and
     // will be responsible to delete it
+	  qDebug() << "setCorePythonManager";
+
     q->setCorePythonManager(new qSlicerPythonManager());
     }
 #endif
+
+  qDebug() << "this->Superclass::init()";
 
   this->Superclass::init();
 
@@ -197,6 +201,9 @@ void qSlicerApplicationPrivate::init()
   this->ErrorLogModel->registerMsgHandler(new ctkITKErrorLogMessageHandler);
   this->ErrorLogModel->registerMsgHandler(new ctkVTKErrorLogMessageHandler);
   this->ErrorLogModel->setAllMsgHandlerEnabled(true);
+
+
+  qDebug() << "setupFileLogging";
 
   q->setupFileLogging();
 
@@ -307,6 +314,8 @@ qSlicerApplication::qSlicerApplication(int &_argc, char **_argv)
   // Note: Since QWidget/QDialog requires a QApplication to be successfully instantiated,
   //       qSlicerIOManager is not added to the constructor initialization list.
   //       Indeed, internally qSlicerIOManager registers qSlicerDataDialog, ...
+
+  qDebug() << "instance create d->CoreIOManager ";
   d->CoreIOManager = QSharedPointer<qSlicerIOManager>(new qSlicerIOManager);
 }
 

@@ -4,6 +4,12 @@ project(qSlicerBaseQTCore)
 # Dependencies
 #
 
+
+find_package(GDCM REQUIRED)
+set(GDCM_USE_VTK FALSE)
+include(${GDCM_USE_FILE})
+
+
 #
 # DCMTK
 #
@@ -26,7 +32,9 @@ if(Slicer_BUILD_CLI_SUPPORT)
     # Import ITK targets required by CTKImageProcessingITKCore
     ITKCommon
     )
-  find_package(ITK 4.8 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
+  
+  #find_package(ITK 4.8 COMPONENTS ${${PROJECT_NAME}_ITK_COMPONENTS} REQUIRED)
+  find_package(ITK REQUIRED)
   set(ITK_NO_IO_FACTORY_REGISTER_MANAGER 1) # See Libs/ITKFactoryRegistration/CMakeLists.txt
   include(${ITK_USE_FILE})
   
@@ -233,7 +241,7 @@ endif(Slicer_USE_PYTHONQT)
 
 
 if(Slicer_REQUIRED_QT_VERSION VERSION_GREATER "4")
-  list(APPEND KIT_target_libraries Qt5::Core Qt5::Widgets Qt5::Script)
+  list(APPEND KIT_target_libraries Qt5::Core Qt5::Widgets Qt5::Script Qt5::Network)
 endif()
 
 

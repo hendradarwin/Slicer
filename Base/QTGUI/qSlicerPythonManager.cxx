@@ -18,6 +18,9 @@
 #include "qSlicerApplication.h"
 #include "qSlicerPythonManager.h"
 
+#ifdef Slicer_USE_NUMPY
+#endif
+
 #ifdef Slicer_USE_PYTHONQT_WITH_TCL
 // SlicerVTK includes
 # include "vtkEventBroker.h"
@@ -60,8 +63,15 @@ void qSlicerPythonManager::executeInitializationScripts()
     return;
     }
 
+  // semua komponen QT di load
+  //PythonQt_QtAll::init();
+
   // Evaluate application script
+  //bin\Python\slicer\slicerqt.py
+  qDebug() << "execute script /slicerqt.py  Started";
   this->executeFile(app->slicerHome() + "/bin/Python/slicer/slicerqt.py");
+
+  qDebug() << "execute script /slicerqt.py  Finished";
 
 #ifdef Slicer_USE_PYTHONQT_WITH_TCL
   // Evaluate application script specific to the TCL layer

@@ -16,6 +16,14 @@ include(${SlicerExecutionModel_USE_FILE})
 find_package(DCMTK REQUIRED)
 
 #
+# GDCM
+#
+find_package(GDCM REQUIRED)
+set(GDCM_USE_VTK FALSE)
+include(${GDCM_USE_FILE})
+
+
+#
 # ITK
 #
 set(${PROJECT_NAME}_ITK_COMPONENTS

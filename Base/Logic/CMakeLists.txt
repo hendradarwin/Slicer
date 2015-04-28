@@ -11,6 +11,16 @@ if(Slicer_BUILD_CLI_SUPPORT)
   find_package(SlicerExecutionModel REQUIRED ModuleDescriptionParser)
 endif()
 
+
+
+# GDCM juga bos
+find_package(GDCM REQUIRED)
+set(GDCM_USE_VTK FALSE)
+include(${GDCM_USE_FILE})
+
+
+
+
 #
 # VTK
 #

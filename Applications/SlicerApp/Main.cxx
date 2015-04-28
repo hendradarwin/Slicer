@@ -109,19 +109,16 @@ int SlicerAppMain(int argc, char* argv[])
   QCoreApplication::setApplicationVersion(Slicer_VERSION_FULL);
   //vtkObject::SetGlobalWarningDisplay(false);
   QApplication::setDesktopSettingsAware(false);
-  QApplication::setStyle(new qSlicerStyle());
+  //QApplication::setStyle(new qSlicerStyle());
 
   qSlicerApplication app(argc, argv);
   if (app.returnCode() != -1)
     {
     return app.returnCode();
     }
-  app.installEventFilter(app.style());
+  //app.installEventFilter(app.style());
 
 
-#ifdef Slicer_USE_QtTesting
-  setEnableQtTesting(); // disabled the native menu bar.
-#endif
 
 #ifdef Slicer_USE_PYTHONQT
   ctkPythonConsole pythonConsole;
@@ -153,14 +150,15 @@ int SlicerAppMain(int argc, char* argv[])
   // Register and instantiate modules
   splashMessage(splashScreen, "Registering modules...");
   moduleFactoryManager->registerModules();
-  if (app.commandOptions()->verbose())
+  //if (app.commandOptions()->verbose())
     {
     qDebug() << "Number of registered modules:"
              << moduleFactoryManager->registeredModuleNames().count();
     }
   splashMessage(splashScreen, "Instantiating modules...");
+  qDebug() << "Instantiating modules...";
   moduleFactoryManager->instantiateModules();
-  if (app.commandOptions()->verbose())
+  //if (app.commandOptions()->verbose())
     {
     qDebug() << "Number of instantiated modules:"
              << moduleFactoryManager->instantiatedModuleNames().count();
@@ -181,7 +179,7 @@ int SlicerAppMain(int argc, char* argv[])
     splashMessage(splashScreen, "Loading module \"" + name + "\"...");
     moduleFactoryManager->loadModule(name);
     }
-  if (app.commandOptions()->verbose())
+  //if (app.commandOptions()->verbose())
     {
     qDebug() << "Number of loaded modules:" << moduleManager->modulesNames().count();
     }
@@ -211,33 +209,33 @@ int SlicerAppMain(int argc, char* argv[])
 
 } // end of anonymous namespace
 
-#if defined (_WIN32) && !defined (Slicer_BUILD_WIN32_CONSOLE)
-int __stdcall WinMain(HINSTANCE hInstance,
-                      HINSTANCE hPrevInstance,
-                      LPSTR lpCmdLine, int nShowCmd)
-{
-  Q_UNUSED(hInstance);
-  Q_UNUSED(hPrevInstance);
-  Q_UNUSED(nShowCmd);
-
-  int argc;
-  char **argv;
-  vtksys::SystemTools::ConvertWindowsCommandLineToUnixArguments(
-    lpCmdLine, &argc, &argv);
-
-  int ret = SlicerAppMain(argc, argv);
-
-  for (int i = 0; i < argc; i++)
-    {
-    delete [] argv[i];
-    }
-  delete [] argv;
-
-  return ret;
-}
-#else
+//#if defined (_WIN32) && !defined (Slicer_BUILD_WIN32_CONSOLE)
+//int __stdcall WinMain(HINSTANCE hInstance,
+//                      HINSTANCE hPrevInstance,
+//                      LPSTR lpCmdLine, int nShowCmd)
+//{
+//  Q_UNUSED(hInstance);
+//  Q_UNUSED(hPrevInstance);
+//  Q_UNUSED(nShowCmd);
+//
+//  int argc;
+//  char **argv;
+////  vtksys::SystemTools::ConvertWindowsCommandLineToUnixArguments(
+//    //lpCmdLine, &argc, &argv);
+//
+//  int ret = SlicerAppMain(argc, argv);
+//
+//  for (int i = 0; i < argc; i++)
+//    {
+//    delete [] argv[i];
+//    }
+//  delete [] argv;
+//
+//  return ret;
+//}
+//#else
 int main(int argc, char *argv[])
 {
   return SlicerAppMain(argc, argv);
 }
-#endif
+//#endif

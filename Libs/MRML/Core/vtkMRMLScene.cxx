@@ -193,15 +193,15 @@ vtkMRMLScene::vtkMRMLScene()
   this->RegisterNodeClass( vtkSmartPointer< vtkMRMLProceduralColorStorageNode >::New() );
   this->RegisterNodeClass( vtkSmartPointer< vtkMRMLTransformDisplayNode >::New() );
   this->RegisterNodeClass( vtkSmartPointer< vtkMRMLTransformStorageNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLTransformNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLGridTransformNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLBSplineTransformNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLDoubleArrayNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLDoubleArrayStorageNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLCrosshairNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLInteractionNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLChartNode >::New() );
-  this->RegisterNodeClass( vtkSmartPointer< vtkMRMLChartViewNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLTransformNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLGridTransformNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLBSplineTransformNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLDoubleArrayNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLDoubleArrayStorageNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLCrosshairNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLInteractionNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLChartNode >::New() );
+  //this->RegisterNodeClass( vtkSmartPointer< vtkMRMLChartViewNode >::New() );
 }
 
 //------------------------------------------------------------------------------

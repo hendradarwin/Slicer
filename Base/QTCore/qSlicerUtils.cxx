@@ -70,8 +70,9 @@ bool qSlicerUtils::isCLILoadableModule(const QString& filePath)
 bool qSlicerUtils::isLoadableModule(const QString& filePath)
 {
   // See http://stackoverflow.com/questions/899422/regular-expression-for-a-string-that-does-not-start-with-a-sequence
-  QRegExp regex("(libqSlicer.+Module\\.(so|dylib))|((?!lib)qSlicer.+Module\\.(dll|DLL))");
-  return regex.exactMatch(QFileInfo(filePath).fileName());
+  //QRegExp regex("(libqSlicer.+Module\\.(so|dylib))|((?!lib)qSlicer.+Module\\.(dll|DLL))");
+  //return regex.exactMatch(QFileInfo(filePath).fileName());
+	return true;
 }
 
 //------------------------------------------------------------------------------

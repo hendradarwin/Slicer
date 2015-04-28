@@ -150,6 +150,9 @@ void qSlicerCoreApplicationPrivate::init()
   // Note also that since environment variables are set using 'setEnvironmentVariable()',
   // 'Environment' is maintained 'up-to-date'. Nevertheless, if the environment
   // is udpated solely using 'putenv(...)' function, 'Environment' won't be updated.
+
+  qDebug() << "qSlicerCoreApplicationPrivate::init()";
+
   this->Environment = QProcessEnvironment::systemEnvironment();
 
   // Set the locale to be "C" to avoid issues related to reading and writing
@@ -196,7 +199,15 @@ void qSlicerCoreApplicationPrivate::init()
     qDebug() << "qSlicerCoreApplication must be given the True argc/argv";
     }
 
+
+  qDebug() << "parseArgument";
+
   this->parseArguments();
+
+
+
+  qDebug() << "set environtment";
+
 
   this->SlicerHome = this->discoverSlicerHomeDirectory();
   this->setEnvironmentVariable("SLICER_HOME", this->SlicerHome);
@@ -236,6 +247,8 @@ void qSlicerCoreApplicationPrivate::init()
   // in MRMLApplicationLogic.
   //this->AppLogic->ProcessMRMLEvents(scene, vtkCommand::ModifiedEvent, NULL);
   //this->AppLogic->SetAndObserveMRMLScene(scene);
+  qDebug() << "AppLogic->CreateProcessingThread()";
+
   this->AppLogic->CreateProcessingThread();
 
   // Set up Slicer to use the system proxy
@@ -253,11 +266,19 @@ void qSlicerCoreApplicationPrivate::init()
   this->DataIOManagerLogic->SetAndObserveDataIOManager(
     this->MRMLRemoteIOLogic->GetDataIOManager());
 
+
+
+  qDebug() << "Create MRML scene ver 2";
+
   // Create MRML scene
   vtkNew<vtkMRMLScene> scene;
+  //QSharedPointer<vtkMRMLScene> qScene(vtkMRMLScene::New());
   q->setMRMLScene(scene.GetPointer());
 
   // Instantiate moduleManager
+
+  qDebug() << "Create Module Manager";
+
   this->ModuleManager = QSharedPointer<qSlicerModuleManager>(new qSlicerModuleManager);
   this->ModuleManager->factoryManager()->setAppLogic(this->AppLogic.GetPointer());
   this->ModuleManager->factoryManager()->setMRMLScene(scene.GetPointer());
@@ -271,14 +292,26 @@ void qSlicerCoreApplicationPrivate::init()
     {
     if (q->corePythonManager())
       {
+
+		//qDebug() << q->pat
+		//pythonp
+		qDebug() << "q->corePythonManager()->mainContext() , Initialize python";
+		// semua komponen QT di load
+
+
       q->corePythonManager()->mainContext(); // Initialize python
-      q->corePythonManager()->setSystemExitExceptionHandlerEnabled(true);
-      q->connect(q->corePythonManager(), SIGNAL(systemExitExceptionRaised(int)),
-                 q, SLOT(terminate(int)));
+      //q->corePythonManager()->setSystemExitExceptionHandlerEnabled(true);
+      //q->connect(q->corePythonManager(), SIGNAL(systemExitExceptionRaised(int)), q, SLOT(terminate(int)));
+
+
+
+
       }
 # ifdef Q_WS_WIN
     // HACK - Since on windows setting an environment variable using putenv doesn't propagate
     // to the environment initialized in python, let's make sure 'os.environ' is updated.
+
+	qDebug() << "updatePythonOsEnviron()";
     this->updatePythonOsEnviron();
 # endif
     }
@@ -286,6 +319,8 @@ void qSlicerCoreApplicationPrivate::init()
 
 #ifdef Slicer_BUILD_EXTENSIONMANAGER_SUPPORT
 
+
+  qDebug() << "create qSlicerExtensionsManagerModel";
   qSlicerExtensionsManagerModel * model = new qSlicerExtensionsManagerModel(q);
   model->setExtensionsSettingsFilePath(q->slicerRevisionUserSettingsFilePath());
   model->setSlicerRequirements(q->repositoryRevision(), q->os(), q->arch());
@@ -367,9 +402,10 @@ QString qSlicerCoreApplicationPrivate::discoverSlicerHomeDirectory()
     {
     QString slicerBin = this->discoverSlicerBinDirectory();
     QDir slicerBinDir(slicerBin);
+	// this is it...
     bool cdUpRes = slicerBinDir.cdUp();
-    Q_ASSERT(cdUpRes);
-    (void)cdUpRes;
+    //Q_ASSERT(cdUpRes);
+    //(void)cdUpRes;
     slicerHome = slicerBinDir.canonicalPath();
     }
 
@@ -409,6 +445,8 @@ void qSlicerCoreApplicationPrivate::setEnvironmentVariable(const QString& key, c
 #ifdef Slicer_USE_PYTHONQT
 void qSlicerCoreApplicationPrivate::setPythonOsEnviron(const QString& key, const QString& value)
 {
+	qDebug() << "qSlicerCoreApplicationPrivate::setPythonOsEnviron";
+
   if(!this->CorePythonManager->isPythonInitialized())
     {
     return;
@@ -459,9 +497,10 @@ QString qSlicerCoreApplicationPrivate::discoverSlicerBinDirectory()
     qCritical() << "Cannot find Slicer executable" << q->applicationDirPath();
     return slicerBin;
     }
-#ifndef Q_OS_MAC
+//#ifndef Q_OS_MAC
   slicerBin =
       qSlicerUtils::pathWithoutIntDir(q->applicationDirPath(), Slicer_BIN_DIR, this->IntDir);
+/*
 #else
   // There are two cases to consider, the application could be started from:
   //   1) Install tree
@@ -481,7 +520,8 @@ QString qSlicerCoreApplicationPrivate::discoverSlicerBinDirectory()
     }
   slicerBin = slicerBinAsDir.path();
 #endif
-  Q_ASSERT(qSlicerUtils::pathEndsWith(slicerBin, Slicer_BIN_DIR));
+*/
+  //Q_ASSERT(qSlicerUtils::pathEndsWith(slicerBin, Slicer_BIN_DIR));
   return slicerBin;
 }
 
@@ -634,13 +674,13 @@ void qSlicerCoreApplicationPrivate::parseArguments()
     {
     qWarning() << "Failed to parse arguments - "
                   "it seems you forgot to call setCoreCommandOptions()";
-    q->terminate(EXIT_FAILURE);
+    //q->terminate(EXIT_FAILURE);
     return;
     }
   if (!options->parse(q->arguments()))
     {
     qCritical("Problem parsing command line arguments.  Try with --help.");
-    q->terminate(EXIT_FAILURE);
+    //q->terminate(EXIT_FAILURE);
     return;
     }
 }
@@ -1200,6 +1240,7 @@ void qSlicerCoreApplication::setCorePythonManager(qSlicerCorePythonManager* mana
 //-----------------------------------------------------------------------------
 qSlicerCorePythonManager* qSlicerCoreApplication::corePythonManager()const
 {
+	qDebug() << "qSlicerCoreApplication::corePythonManager()const";
   Q_D(const qSlicerCoreApplication);
   return d->CorePythonManager.data();
 }
